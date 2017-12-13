@@ -232,7 +232,6 @@ Using the open hours information, we created three variables for each business: 
 
 \subsection{Data Audit and Imputation}
 
-\subsubsection{Yelp }
 We have limited our aggregations to geographic units with at least 10 businesses, but since some attributes are only present for food establishments, there are still a few NA's in the aggregated measurements---i.e., some neighborhood may not have a variable for how many restaurants require guests to dress formally, because there are no restaurants in it at all. We imputed all missing values with the median of corresponding variables.
 
 In the end, for the Zillow neighborhood level, we built a $442 \times 24$ feature matrix out of the Yelp data, representing the business dynamics of neighborhoods.
@@ -274,7 +273,7 @@ We first applied K-Means on the raw business dynamics features aggregated at the
   \label{nbh-kmeans}
 \end{figure}
 
-The highly skewed variable \texttt{n\_biz} (number of businesses in a neighborhood) dominated the clustering process and made the sizes of clusters extremely uneven. The fact that it has far larger scale than other variables also made it harder to account for other variables. We could see from the cluster labels that the smaller clusters contained only neighborhoods with a very high amount of businesses (Table \ref{nbh-centroids}). In fact, if we let $k = 2$, the average silhouette score would jump from $0.58$ ($k = 4$) to $0.87$, indicating an even better separating of neighborhoods. While it is not technically wrong that neighborhoods with many businesses are vastly different from others, we would still want to uncover more nuanced patterns.
+The highly skewed variable \texttt{n\_biz} (number of businesses in a neighborhood) dominated the clustering process and made the sizes of clusters extremely uneven. The fact that it has far larger scale than other variables also made it harder to account for other variables. We could see from the cluster labels that the smaller clusters contained only neighborhoods with a very high amount of businesses (Table \ref{nbh-centroids}). In fact, if we let $k = 2$, the average silhouette score would jump from $0.58$ ($k = 4$) to $0.87$, indicating an even better separation of neighborhoods. While it is not technically wrong that neighborhoods with many businesses are vastly different from others, singling out just a few large neighborhoods was not particularly useful.
 
 This led us to investigate feature scaling techniques.
 
@@ -311,7 +310,6 @@ This led us to investigate feature scaling techniques.
 \small{* The first column represents cluster label, the second column is the number of neighborhoods in the cluster}
 
 \end{table*}
-
 
 \subsubsection{K-Means clustering after feature scaling}
 
@@ -445,7 +443,7 @@ Clusters obtained from census data were considered the ``ground truth'', even th
 
 We noticed that all purity scores for each row were calculated based on the overlap between the Yelp data clusters and the largest census data cluster. Basically the largest cluster by census data encompassed the majority of the census tracts in all clusters by business dynamics. This is certainly not desired. We tested different combinations of preprocessing steps and model choices. Unfortunately, the results were more or less the same.
 
-It seemed impossible to use clustering methods to explain business dynamics with census data. After all, there were no practical clusters in both data sources to begin with (simply separating a few high-density neighborhoods was not particularly useful).
+It seemed impossible to use clustering methods to explain business dynamics with census data. After all, there were no practical clusters in both data sources to begin with.
 
 \begin{table}[h]
 \centering
