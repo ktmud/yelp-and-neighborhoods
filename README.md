@@ -9,8 +9,8 @@ We employ different clustering techniques to investigate the relationship betwee
 
 ## Folder structure
 
-- **code** - the Jupyter notebooks that is used to process data and generate graphs.
-- **data** - auxiliary small datasets and intermediate tidy data files generated in the process.
+- **code** - the Jupyter notebooks containing code for data processing and analysis.
+- **data** - auxiliary datasets and intermediate tidy data files generated in the process.
 - **tex** - the source code for the accompanying paper written in LaTex.
 
 It you want to reproduce the data cleaning steps, you would also need to place the
